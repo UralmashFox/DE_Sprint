@@ -1,0 +1,31 @@
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 4 items
+-rw-r--r--   1 cloudera cloudera     736519 2022-12-18 09:29 voyna-i-mir-tom-1.txt
+-rw-r--r--   1 cloudera cloudera     770324 2022-12-18 09:29 voyna-i-mir-tom-2.txt
+-rw-r--r--   1 cloudera cloudera     843205 2022-12-18 09:29 voyna-i-mir-tom-3.txt
+-rw-r--r--   1 cloudera cloudera     697960 2022-12-18 09:29 voyna-i-mir-tom-4.txt
+[cloudera@quickstart ~]$ hdfs dfs -getmerge -nl voyna-i-mir-tom-1.txt voyna-i-mir-tom-2.txt voyna-i-mir-tom-3.txt voyna-i-mir-tom-4.txt output.txt
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 5 items
+-rw-r--r--   1 cloudera cloudera    3048012 2022-12-18 09:55 output.txt
+-rw-r--r--   1 cloudera cloudera     736519 2022-12-18 09:29 voyna-i-mir-tom-1.txt
+-rw-r--r--   1 cloudera cloudera     770324 2022-12-18 09:29 voyna-i-mir-tom-2.txt
+-rw-r--r--   1 cloudera cloudera     843205 2022-12-18 09:29 voyna-i-mir-tom-3.txt
+-rw-r--r--   1 cloudera cloudera     697960 2022-12-18 09:29 voyna-i-mir-tom-4.txt
+[cloudera@quickstart ~]$ hadoop fs -chmod +wx output.txt 
+[cloudera@quickstart ~]$ hadoop fs -ls
+Found 5 items
+-rwxrwxrwx   1 cloudera cloudera    3048012 2022-12-18 09:55 output.txt
+-rw-r--r--   1 cloudera cloudera     736519 2022-12-18 09:29 voyna-i-mir-tom-1.txt
+-rw-r--r--   1 cloudera cloudera     770324 2022-12-18 09:29 voyna-i-mir-tom-2.txt
+-rw-r--r--   1 cloudera cloudera     843205 2022-12-18 09:29 voyna-i-mir-tom-3.txt
+-rw-r--r--   1 cloudera cloudera     697960 2022-12-18 09:29 voyna-i-mir-tom-4.txt
+[cloudera@quickstart ~]$ hadoop fs -ls output.txt 
+-rwxrwxrwx   1 cloudera cloudera    3048012 2022-12-18 09:55 output.txt
+[cloudera@quickstart ~]$ hdfs dfs -setrep -w 2 output.txt 
+Replication 2 set: output.txt
+Waiting for output.txt ............................................................................................................................................................^C[cloudera@quickstart ~]$ ^C
+[cloudera@quickstart ~]$ hadoop fs -cat output.txt | wc -l
+10276
+[cloudera@quickstart ~]$ 
+
